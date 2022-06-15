@@ -1,0 +1,48 @@
+Jun 08, 2022 3:56:39 PM com.idi.userlogin.Handlers.ControllerHandler buildFolderStruct
+SEVERE: There was an error building the folder structure!
+java.lang.NullPointerException
+	at com.idi.userlogin.Handlers.ControllerHandler.getFolderStructure(ControllerHandler.java:105)
+	at com.idi.userlogin.Handlers.ControllerHandler.buildFolderStruct(ControllerHandler.java:171)
+	at com.idi.userlogin.Controllers.BaseEntryController$EntryItem.<init>(BaseEntryController.java:269)
+	at com.idi.userlogin.Controllers.ManifestViewController.getItemsForCombo(ManifestViewController.java:324)
+	at com.idi.userlogin.Controllers.ManifestViewController.lambda$groupSelectTask$7(ManifestViewController.java:271)
+	at java.util.concurrent.CompletableFuture$AsyncRun.run$$$capture(CompletableFuture.java:1640)
+	at java.util.concurrent.CompletableFuture$AsyncRun.run(CompletableFuture.java)
+	at java.util.concurrent.CompletableFuture$AsyncRun.exec(CompletableFuture.java:1632)
+	at java.util.concurrent.ForkJoinTask.doExec$$$capture(ForkJoinTask.java:289)
+	at java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java)
+	at java.util.concurrent.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1067)
+	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1703)
+	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:172)
+
+Jun 08, 2022 3:57:00 PM com.idi.userlogin.Handlers.ControllerHandler buildFolderStruct
+SEVERE: There was an error building the folder structure!
+java.lang.NullPointerException
+	at com.idi.userlogin.Handlers.ControllerHandler.buildFolderStruct(ControllerHandler.java:190)
+	at com.idi.userlogin.Controllers.BaseEntryController$EntryItem.<init>(BaseEntryController.java:269)
+	at com.idi.userlogin.Controllers.ManifestViewController.getItemsForCombo(ManifestViewController.java:324)
+	at com.idi.userlogin.Controllers.ManifestViewController.lambda$groupSelectTask$7(ManifestViewController.java:271)
+	at java.util.concurrent.CompletableFuture$AsyncRun.run$$$capture(CompletableFuture.java:1640)
+	at java.util.concurrent.CompletableFuture$AsyncRun.run(CompletableFuture.java)
+	at java.util.concurrent.CompletableFuture$AsyncRun.exec(CompletableFuture.java:1632)
+	at java.util.concurrent.ForkJoinTask.doExec$$$capture(ForkJoinTask.java:289)
+	at java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java)
+	at java.util.concurrent.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1067)
+	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1703)
+	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:172)
+
+Jun 08, 2022 3:57:00 PM com.idi.userlogin.Controllers.ManifestViewController getItemsForCombo
+SEVERE: There was an error getting the groups from the db!
+java.lang.NullPointerException
+	at com.idi.userlogin.Controllers.BaseEntryController$EntryItem.<init>(BaseEntryController.java:269)
+	at com.idi.userlogin.Controllers.ManifestViewController.getItemsForCombo(ManifestViewController.java:324)
+	at com.idi.userlogin.Controllers.ManifestViewController.lambda$groupSelectTask$7(ManifestViewController.java:271)
+	at java.util.concurrent.CompletableFuture$AsyncRun.run$$$capture(CompletableFuture.java:1640)
+	at java.util.concurrent.CompletableFuture$AsyncRun.run(CompletableFuture.java)
+	at java.util.concurrent.CompletableFuture$AsyncRun.exec(CompletableFuture.java:1632)
+	at java.util.concurrent.ForkJoinTask.doExec$$$capture(ForkJoinTask.java:289)
+	at java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java)
+	at java.util.concurrent.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1067)
+	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1703)
+	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:172)
+
