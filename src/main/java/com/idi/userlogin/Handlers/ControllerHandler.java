@@ -415,7 +415,7 @@ public abstract class ControllerHandler {
                 e2.totalProperty().set((Integer) count.keySet().toArray()[0]);
                 e2.existsProperty().set((Boolean) count.values().toArray()[0]);
                 return e2;
-            }).thenAccept(item1 -> {
+            }).thenAcceptAsync(item1 -> {
                 updateItem(item1);
             });
             futures.add(future);
@@ -433,7 +433,7 @@ public abstract class ControllerHandler {
             item.totalProperty().set((Integer) pages.keySet().toArray()[0]);
             item.existsProperty().set((Boolean) pages.values().toArray()[0]);
             return item;
-        }).thenRun(() -> {
+        }).thenRunAsync(() -> {
             updateItem(item);
         }).join();
     }
@@ -529,13 +529,13 @@ public abstract class ControllerHandler {
             int gTotal = getGroupTotal(selGroup);
             selGroup.setTotal(gTotal);
             return ControllerHandler.selGroup;
-        }).thenApply(group -> {
+        }).thenApplyAsync(group -> {
             Platform.runLater(() -> {
                 groupCountProp.set(group.getTotal());
             });
             updateGroup(group, completed);
             return group;
-        }).thenAccept(group -> {
+        }).thenAcceptAsync(group -> {
             ProjectLog.updateLog(group);
         });
         return future;

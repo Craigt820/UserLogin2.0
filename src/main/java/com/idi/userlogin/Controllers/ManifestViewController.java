@@ -20,6 +20,7 @@ import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.layout.AnchorPane;
 import javafx.util.StringConverter;
+import org.apache.commons.collections4.map.HashedMap;
 import org.apache.commons.dbutils.DbUtils;
 import org.controlsfx.control.SearchableComboBox;
 import org.controlsfx.control.textfield.CustomTextField;
@@ -249,21 +250,18 @@ public class ManifestViewController extends BaseEntryController<BaseEntryControl
                     selGroup.setText(nv.getName());
                     tree.setPlaceholder(indicator);
                     tree.getPlaceholder().autosize();
+                    try {
+                        itemCombo.getItems().clear();
+                    } catch (IndexOutOfBoundsException e) {
+                        e.printStackTrace();
+                    }
                     CompletableFuture.runAsync(() -> {
-                        try {
-                            itemCombo.getItems().clear();
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
                         ObservableList<EntryItem> comboItems = getItemsForCombo(nv);
-                        if (!comboItems.isEmpty()) {
-                            sortItems(comboItems);
-                            itemCombo.getItems().setAll(comboItems);
-                        }
-                    }).thenApply(e -> {
+
+                    }).thenApplyAsync(e -> {
                         ObservableList<?> entryItems = getGroupItems(ControllerHandler.selGroup);
                         return entryItems;
-                    }).thenApply(entryItems -> {
+                    }).thenApplyAsync(entryItems -> {
                         ObservableList group = ControllerHandler.selGroup.getItemList();
                         group.setAll(entryItems);
                         Platform.runLater(() -> {
@@ -271,10 +269,10 @@ public class ManifestViewController extends BaseEntryController<BaseEntryControl
                         });
                         List itemList = entryItems.stream().map(TreeItem::new).collect(Collectors.toList());
                         return itemList;
-                    }).thenApply(itemList -> {
+                    }).thenApplyAsync(itemList -> {
                         tree.getRoot().getChildren().addAll(itemList);
                         return itemList;
-                    }).thenRun(() -> {
+                    }).thenRunAsync(() -> {
                         Platform.runLater(() -> {
                             groupCountProp.set(countGroupTotal());
                             tree.refresh();
@@ -300,20 +298,36 @@ public class ManifestViewController extends BaseEntryController<BaseEntryControl
         ResultSet set = null;
         PreparedStatement ps = null;
         ObservableList<EntryItem> group_items = FXCollections.observableArrayList();
+        Map<Integer, String> items = new HashedMap<>();
         try {
             connection = ConnectionHandler.createDBConnection();
-            ps = connection.prepareStatement("SELECT m.id, TRIM(m.`" + uid + "`) as item FROM  `" + JsonHandler.getSelJob().getJob_id() + "" + DBUtils.DBTable.M.getTable() + "` m LEFT JOIN `" + JsonHandler.getSelJob().getJob_id() + "" + DBUtils.DBTable.D.getTable() + "` d ON m.id = d.manifest_id WHERE d.employee_id IS NULL AND m.group_id=" + group.getID());
+            connection.setAutoCommit(false);
+            ps = connection.prepareStatement("SELECT m.id, TRIM(m." + uid + ") as item FROM  `" + JsonHandler.getSelJob().getJob_id() + "" + DBUtils.DBTable.M.getTable() + "` m LEFT JOIN `" + JsonHandler.getSelJob().getJob_id() + "" + DBUtils.DBTable.D.getTable() + "` d ON m.id = d.manifest_id WHERE d.employee_id IS NULL AND m.group_id=" + group.getID(), Connection.TRANSACTION_READ_UNCOMMITTED);
             set = ps.executeQuery();
             while (set.next()) {
-                EntryItem item = new EntryItem(set.getInt("m.id"), group.getCollection(), group, set.getString("item"), 0, 0, "", false, "", "", "", "");
-                group_items.add(item);
+                System.out.println(set.getInt("m.id") + " " + set.getString("item"));
+                items.put(set.getInt("m.id"), set.getString("item"));
             }
-
+            connection.commit();
         } catch (Exception e) {
             e.printStackTrace();
             Main.LOGGER.log(Level.SEVERE, "There was an error getting the groups from the db!", e);
 
         } finally {
+            items.entrySet().parallelStream().forEach((k -> {
+                int id = k.getKey();
+                String val = k.getValue();
+                EntryItem item = new EntryItem(id, group.getCollection(), group, val, 0, 0, "", false, "", "", "", "");
+                Platform.runLater(() -> {
+                    itemCombo.getItems().add(item);
+                });
+            }));
+            Platform.runLater(() -> {
+                if (!itemCombo.getItems().isEmpty()) {
+                    sortItems(itemCombo.getItems());
+                }
+            });
+
             DbUtils.closeQuietly(set);
             DbUtils.closeQuietly(connection);
             DbUtils.closeQuietly(ps);

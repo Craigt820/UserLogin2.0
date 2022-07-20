@@ -209,8 +209,8 @@ public abstract class BaseEntryController<T extends Item> extends ControllerHand
                 selGroup.setComplete(true);
                 CompletableFuture.runAsync(() -> {
                             updateAllHelper(true);
-                        }).thenRun(() -> ProjectLog.updateLog(ControllerHandler.selGroup))
-                        .thenRun(() -> {
+                        }).thenRunAsync(() -> ProjectLog.updateLog(ControllerHandler.selGroup))
+                        .thenRunAsync(() -> {
                             Platform.runLater(() -> {
                                 fxTrayIcon.showInfoMessage("Group '" + ControllerHandler.selGroup.getName() + "' has been completed!");
                                 tree.getRoot().getChildren().clear();
@@ -325,13 +325,13 @@ public abstract class BaseEntryController<T extends Item> extends ControllerHand
                         int gTotal = ControllerHandler.getGroupTotal(ControllerHandler.selGroup) - item.getTotal();
                         ControllerHandler.selGroup.setTotal(gTotal);
                         return ControllerHandler.selGroup;
-                    }).thenAccept(group -> {
+                    }).thenAcceptAsync(group -> {
                         Platform.runLater(() -> {
                             groupCountProp.set(group.getTotal());
                         });
                         updateGroup(group, false);
                         ProjectLog.updateLog(group);
-                    }).thenRun(() -> {
+                    }).thenRunAsync(() -> {
                         tree.refresh();
                     });
                 }
@@ -367,16 +367,15 @@ public abstract class BaseEntryController<T extends Item> extends ControllerHand
                     CompletableFuture.supplyAsync(() -> {
                         final ObservableList<?> entryItems = getGroupItems(ControllerHandler.selGroup);
                         return entryItems;
-                    }).thenApply(entryItems -> {
+                    }).thenApplyAsync(entryItems -> {
                         final ObservableList group = ControllerHandler.selGroup.getItemList();
                         group.setAll(entryItems);
                         final List itemList = entryItems.stream().map(TreeItem::new).collect(Collectors.toList());
                         return itemList;
-                    }).thenApply(itemList -> {
+                    }).thenApplyAsync(itemList -> {
                         tree.getRoot().getChildren().addAll(itemList);
                         return itemList;
-                    }).thenRun(() -> {
-
+                    }).thenRunAsync(() -> {
                         Platform.runLater(() -> {
                             nv.setTotal(ControllerHandler.getGroupTotal(nv));
                             groupCountProp.set(countGroupTotal());
@@ -534,7 +533,6 @@ public abstract class BaseEntryController<T extends Item> extends ControllerHand
     public void afterInitialize() {
         //For Main Menu
         // Create the tree
-
         colCombo.getItems().clear();
         TreeItem<Group> rootItem = new TreeItem<Group>(new Group(null, ""));
         rootItem.setExpanded(true);
@@ -717,18 +715,20 @@ public abstract class BaseEntryController<T extends Item> extends ControllerHand
                                     BaseEntryController.updateSelected(getTreeTableRow().getItem());
                                     int gTotal = getTreeTableView().getRoot().getChildren().stream().mapToInt(e2 -> e2.getValue().getTotal()).sum();
                                     ControllerHandler.selGroup.setTotal(gTotal);
-                                }).thenRun(() -> {
+                                }).thenRunAsync(() -> {
                                     Platform.runLater(() -> {
                                         groupCountProp.set(ControllerHandler.selGroup.getTotal());
                                     });
                                     updateGroup(ControllerHandler.selGroup, false);
-                                }).thenRun(() -> {
+                                }).thenRunAsync(() -> {
                                     updateLog(ControllerHandler.selGroup);
-                                }).thenRun(() -> {
+                                }).thenRunAsync(() -> {
                                     tree.refresh();
                                 });
                             } else {
                                 getTreeTableRow().getTreeItem().getValue().completed_On.set(null);
+                                BaseEntryController.updateSelected(getTreeTableRow().getItem());
+
                             }
                         });
                     } else {
@@ -1132,9 +1132,9 @@ public abstract class BaseEntryController<T extends Item> extends ControllerHand
     private void updateAllHelper(boolean completed) {
         CompletableFuture.runAsync(() -> {
             updateAll(ControllerHandler.selGroup.getItemList());
-        }).thenRun(() -> {
+        }).thenRunAsync(() -> {
             updateGroupHandler(completed);
-        }).thenRun(() -> {
+        }).thenRunAsync(() -> {
             tree.refresh();
         }).join();
     }
@@ -1197,7 +1197,7 @@ public abstract class BaseEntryController<T extends Item> extends ControllerHand
                 Platform.runLater(() -> {
                     ControllerHandler.selGroup.getItemList().forEach(e2 -> e2.getCompleted().setSelected(true));
                 });
-            }).thenRun(() -> updateAllHelper(false)).thenRun(()->{
+            }).thenRunAsync(() -> updateAllHelper(false)).thenRun(() -> {
                 tree.refresh();
             }).join();
 

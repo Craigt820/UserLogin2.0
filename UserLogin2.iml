@@ -40,7 +40,8 @@
     <orderEntry type="library" name="Maven: org.openjfx:javafx-graphics:win:16-ea+3" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-base:16-ea+3" level="project" />
     <orderEntry type="library" name="Maven: org.openjfx:javafx-base:win:16-ea+3" level="project" />
-    <orderEntry type="library" name="Maven: mysql:mysql-connector-java:5.1.49" level="project" />
+    <orderEntry type="library" name="Maven: mysql:mysql-connector-java:8.0.29" level="project" />
+    <orderEntry type="library" name="Maven: com.google.protobuf:protobuf-java:3.19.4" level="project" />
     <orderEntry type="library" name="Maven: com.guicedee.services:apache-poi-ooxml:1.0.19.13" level="project" />
     <orderEntry type="library" name="Maven: com.guicedee.services:commons-compress:1.0.19.13" level="project" />
     <orderEntry type="library" name="Maven: com.guicedee.services:commons-xmlbeans:1.0.19.13" level="project" />
@@ -84,7 +85,7 @@
     <orderEntry type="module-library">
       <library name="Maven: javafx-packager:javafx-packager:1.8.0_20">
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../../../Program Files/Java/jdk1.8.0_301/jre/../lib/ant-javafx.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../../../Program Files/Java/jdk1.8.0_291/jre/../lib/ant-javafx.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

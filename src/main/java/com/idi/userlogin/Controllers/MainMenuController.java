@@ -54,6 +54,7 @@ public class MainMenuController implements Initializable {
             prop.put("connectTimeout", "2000");
             prop.put("user", JsonHandler.user);
             prop.put("password", JsonHandler.pass);
+            prop.put("allowPublicKeyRetrieval", true);
             connection = DriverManager.getConnection(ConnectionHandler.CONN, prop);
             String getLogin = "SELECT id,Name FROM employees WHERE Name=? AND Password=? LIMIT 1";
             preparedStatement = connection.prepareStatement(getLogin); //Recommended for running SQL queries multiple times implements Statement interface

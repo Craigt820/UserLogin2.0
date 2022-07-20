@@ -1,0 +1,142 @@
+Jul 07, 2022 11:39:07 AM com.idi.userlogin.Controllers.ManifestViewController getItemsForCombo
+SEVERE: There was an error getting the groups from the db!
+java.sql.SQLException: Column 'm.`IDI_FileName`' not found.
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:129)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:89)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:63)
+	at com.mysql.cj.jdbc.result.ResultSetImpl.findColumn(ResultSetImpl.java:584)
+	at com.mysql.cj.jdbc.result.ResultSetImpl.getString(ResultSetImpl.java:896)
+	at com.idi.userlogin.Controllers.ManifestViewController.getItemsForCombo(ManifestViewController.java:309)
+	at com.idi.userlogin.Controllers.ManifestViewController.lambda$groupSelectTask$7(ManifestViewController.java:258)
+	at java.util.concurrent.CompletableFuture$AsyncRun.run(CompletableFuture.java:1640)
+	at java.util.concurrent.CompletableFuture$AsyncRun.exec(CompletableFuture.java:1632)
+	at java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:289)
+	at java.util.concurrent.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1067)
+	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1703)
+	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:172)
+
+Jul 07, 2022 11:39:43 AM com.idi.userlogin.Controllers.ManifestViewController getItemsForCombo
+SEVERE: There was an error getting the groups from the db!
+java.sql.SQLException: Column 'm.IDI_FileName' not found.
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:129)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:89)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:63)
+	at com.mysql.cj.jdbc.result.ResultSetImpl.findColumn(ResultSetImpl.java:584)
+	at com.mysql.cj.jdbc.result.ResultSetImpl.getString(ResultSetImpl.java:896)
+	at com.idi.userlogin.Controllers.ManifestViewController.getItemsForCombo(ManifestViewController.java:309)
+	at com.idi.userlogin.Controllers.ManifestViewController.lambda$groupSelectTask$7(ManifestViewController.java:258)
+	at java.util.concurrent.CompletableFuture$AsyncRun.run(CompletableFuture.java:1640)
+	at java.util.concurrent.CompletableFuture$AsyncRun.exec(CompletableFuture.java:1632)
+	at java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:289)
+	at java.util.concurrent.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1067)
+	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1703)
+	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:172)
+
+Jul 07, 2022 11:41:18 AM com.idi.userlogin.Controllers.ManifestViewController getItemsForCombo
+SEVERE: There was an error getting the groups from the db!
+java.sql.SQLException: Column 'm.IDI_FileName' not found.
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:129)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:97)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:89)
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:63)
+	at com.mysql.cj.jdbc.result.ResultSetImpl.findColumn(ResultSetImpl.java:584)
+	at com.mysql.cj.jdbc.result.ResultSetImpl.getString(ResultSetImpl.java:896)
+	at com.idi.userlogin.Controllers.ManifestViewController.getItemsForCombo(ManifestViewController.java:309)
+	at com.idi.userlogin.Controllers.ManifestViewController.lambda$groupSelectTask$7(ManifestViewController.java:258)
+	at java.util.concurrent.CompletableFuture$AsyncRun.run(CompletableFuture.java:1640)
+	at java.util.concurrent.CompletableFuture$AsyncRun.exec(CompletableFuture.java:1632)
+	at java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:289)
+	at java.util.concurrent.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1067)
+	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1703)
+	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:172)
+
+Jul 07, 2022 11:42:51 AM com.idi.userlogin.Controllers.ManifestViewController getItemsForCombo
+SEVERE: There was an error getting the groups from the db!
+java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'm LEFT JOIN `PRINCETONAA001_D` d ON m.id = d.manifest_id WHERE d.employee_id IS ' at line 1
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:916)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeQuery(ClientPreparedStatement.java:972)
+	at com.idi.userlogin.Controllers.ManifestViewController.getItemsForCombo(ManifestViewController.java:307)
+	at com.idi.userlogin.Controllers.ManifestViewController.lambda$groupSelectTask$7(ManifestViewController.java:258)
+	at java.util.concurrent.CompletableFuture$AsyncRun.run(CompletableFuture.java:1640)
+	at java.util.concurrent.CompletableFuture$AsyncRun.exec(CompletableFuture.java:1632)
+	at java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:289)
+	at java.util.concurrent.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1067)
+	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1703)
+	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:172)
+
+Jul 07, 2022 12:03:32 PM com.idi.userlogin.Controllers.ManifestViewController getItemsForCombo
+SEVERE: There was an error getting the groups from the db!
+java.lang.NullPointerException
+	at com.idi.userlogin.Controllers.ManifestViewController.getItemsForCombo(ManifestViewController.java:305)
+	at com.idi.userlogin.Controllers.ManifestViewController.lambda$groupSelectTask$7(ManifestViewController.java:258)
+	at java.util.concurrent.CompletableFuture$AsyncRun.run(CompletableFuture.java:1640)
+	at java.util.concurrent.CompletableFuture$AsyncRun.exec(CompletableFuture.java:1632)
+	at java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:289)
+	at java.util.concurrent.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1067)
+	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1703)
+	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:172)
+
+Jul 07, 2022 12:03:56 PM com.idi.userlogin.Controllers.ManifestViewController getItemsForCombo
+SEVERE: There was an error getting the groups from the db!
+java.lang.NullPointerException
+	at com.idi.userlogin.Controllers.ManifestViewController.getItemsForCombo(ManifestViewController.java:305)
+	at com.idi.userlogin.Controllers.ManifestViewController.lambda$groupSelectTask$7(ManifestViewController.java:258)
+	at java.util.concurrent.CompletableFuture$AsyncRun.run(CompletableFuture.java:1640)
+	at java.util.concurrent.CompletableFuture$AsyncRun.exec(CompletableFuture.java:1632)
+	at java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:289)
+	at java.util.concurrent.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1067)
+	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1703)
+	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:172)
+
+Jul 07, 2022 12:17:38 PM com.idi.userlogin.Controllers.ManifestViewController getItemsForCombo
+SEVERE: There was an error getting the groups from the db!
+java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Code) as item FROM  `AKC001_M` m LEFT JOIN `AKC001_D` d ON m.id = d.manifest_id ' at line 1
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:916)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeQuery(ClientPreparedStatement.java:972)
+	at com.idi.userlogin.Controllers.ManifestViewController.getItemsForCombo(ManifestViewController.java:308)
+	at com.idi.userlogin.Controllers.ManifestViewController.lambda$groupSelectTask$7(ManifestViewController.java:258)
+	at java.util.concurrent.CompletableFuture$AsyncRun.run(CompletableFuture.java:1640)
+	at java.util.concurrent.CompletableFuture$AsyncRun.exec(CompletableFuture.java:1632)
+	at java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:289)
+	at java.util.concurrent.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1067)
+	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1703)
+	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:172)
+
+Jul 07, 2022 12:17:46 PM com.idi.userlogin.Controllers.ManifestViewController getItemsForCombo
+SEVERE: There was an error getting the groups from the db!
+java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Code) as item FROM  `AKC001_M` m LEFT JOIN `AKC001_D` d ON m.id = d.manifest_id ' at line 1
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:916)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeQuery(ClientPreparedStatement.java:972)
+	at com.idi.userlogin.Controllers.ManifestViewController.getItemsForCombo(ManifestViewController.java:308)
+	at com.idi.userlogin.Controllers.ManifestViewController.lambda$groupSelectTask$7(ManifestViewController.java:258)
+	at java.util.concurrent.CompletableFuture$AsyncRun.run(CompletableFuture.java:1640)
+	at java.util.concurrent.CompletableFuture$AsyncRun.exec(CompletableFuture.java:1632)
+	at java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:289)
+	at java.util.concurrent.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1067)
+	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1703)
+	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:172)
+
+Jul 07, 2022 12:17:55 PM com.idi.userlogin.Controllers.ManifestViewController getItemsForCombo
+SEVERE: There was an error getting the groups from the db!
+java.sql.SQLSyntaxErrorException: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'Code) as item FROM  `AKC001_M` m LEFT JOIN `AKC001_D` d ON m.id = d.manifest_id ' at line 1
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:916)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeQuery(ClientPreparedStatement.java:972)
+	at com.idi.userlogin.Controllers.ManifestViewController.getItemsForCombo(ManifestViewController.java:308)
+	at com.idi.userlogin.Controllers.ManifestViewController.lambda$groupSelectTask$7(ManifestViewController.java:258)
+	at java.util.concurrent.CompletableFuture$AsyncRun.run(CompletableFuture.java:1640)
+	at java.util.concurrent.CompletableFuture$AsyncRun.exec(CompletableFuture.java:1632)
+	at java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:289)
+	at java.util.concurrent.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1067)
+	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1703)
+	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:172)
+
