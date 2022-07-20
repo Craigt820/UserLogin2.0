@@ -728,7 +728,6 @@ public abstract class BaseEntryController<T extends Item> extends ControllerHand
                             } else {
                                 getTreeTableRow().getTreeItem().getValue().completed_On.set(null);
                                 BaseEntryController.updateSelected(getTreeTableRow().getItem());
-
                             }
                         });
                     } else {

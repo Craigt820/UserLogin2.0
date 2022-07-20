@@ -93,6 +93,28 @@ public class ManifestViewController extends BaseEntryController<BaseEntryControl
         }
     }
 
+    public int getManifest_ID() {
+        Connection connection = null;
+        ResultSet set = null;
+        PreparedStatement ps = null;
+        int key = 0;
+        try {
+            connection = ConnectionHandler.createDBConnection();
+            ps = connection.prepareStatement("SELECT id FROM `" + JsonHandler.getSelJob().getJob_id() + "" + DBUtils.DBTable.M.getTable() + "` WHERE `" + uid + "`='" + itemCombo.getSelectionModel().getSelectedItem().getName() + "' LIMIT 1");
+            set = ps.executeQuery();
+            if (set.next()) {
+                key = set.getInt("id");
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        } finally {
+            DbUtils.closeQuietly(set);
+            DbUtils.closeQuietly(ps);
+            DbUtils.closeQuietly(connection);
+        }
+        return key;
+    }
+
     @Override
     public int insertHelper(Item<? extends Item> item) {
         Connection connection = null;
@@ -108,9 +130,7 @@ public class ManifestViewController extends BaseEntryController<BaseEntryControl
             ps.setInt(3, item.getGroup().getID());
             ps.setString(4, item.getComments());
             ps.setString(5, item.getConditions().toString().replaceAll("[\\[|\\]]", ""));
-
             ps.executeUpdate();
-
         } catch (SQLException | ParseException e) {
             e.printStackTrace();
         } finally {
@@ -119,7 +139,7 @@ public class ManifestViewController extends BaseEntryController<BaseEntryControl
             DbUtils.closeQuietly(connection);
             updateItemProps(item);
         }
-        return key;
+        return getManifest_ID();
     }
 
     @Override
@@ -171,6 +191,9 @@ public class ManifestViewController extends BaseEntryController<BaseEntryControl
                 }
             };
         });
+        itemInfo.setPrefHeight(400);
+        itemInfo.setMinHeight(400);
+
         tree.setEditable(false); //The View shouldn't be editable for Manifest Mode
         itemInfo.setRoot(new TreeItem<String>());
         groupTree.getSelectionModel().selectedItemProperty().addListener((ob, ov, nv) -> {
@@ -255,10 +278,7 @@ public class ManifestViewController extends BaseEntryController<BaseEntryControl
                     } catch (IndexOutOfBoundsException e) {
                         e.printStackTrace();
                     }
-                    CompletableFuture.runAsync(() -> {
-                        ObservableList<EntryItem> comboItems = getItemsForCombo(nv);
-
-                    }).thenApplyAsync(e -> {
+                    CompletableFuture.supplyAsync(() -> {
                         ObservableList<?> entryItems = getGroupItems(ControllerHandler.selGroup);
                         return entryItems;
                     }).thenApplyAsync(entryItems -> {
@@ -278,6 +298,12 @@ public class ManifestViewController extends BaseEntryController<BaseEntryControl
                             tree.refresh();
                         });
                     });
+
+                    CompletableFuture.runAsync(() -> {
+                        ObservableList<EntryItem> comboItems = getItemsForCombo(nv);
+                    });
+
+
                 }
                 insertBtn.setDisable(false);
             }
@@ -346,10 +372,10 @@ public class ManifestViewController extends BaseEntryController<BaseEntryControl
         AtomicInteger progress = new AtomicInteger(0);
         try {
             connection = ConnectionHandler.createDBConnection();
-            ps = connection.prepareStatement("SELECT w.name,d.id,g.id as group_id, g.name as group_name, TRIM(m.`" + uid + "`) as item,d.non_feeder, d.completed, e.name as employee, d.total, t.name as type,d.conditions,d.comments,d.started_On,d.completed_On FROM `" + JsonHandler.getSelJob().getJob_id() + "" + DBUtils.DBTable.D.getTable() + "` d INNER JOIN employees e ON d.employee_id = e.id INNER JOIN `" + JsonHandler.getSelJob().getJob_id() + "" + DBUtils.DBTable.G.getTable() + "` g ON d.group_id = g.id INNER JOIN item_types t ON d.type_id = t.id INNER JOIN `" + JsonHandler.getSelJob().getJob_id() + "" + DBUtils.DBTable.M.getTable() + "` m ON m.id=d.manifest_id INNER JOIN workstation w ON w.id=d.workstation WHERE d.group_id=" + group.getID() + " AND employee_id=" + ConnectionHandler.user.getId());
+            ps = connection.prepareStatement("SELECT w.name,d.id,d.manifest_id,g.id as group_id, g.name as group_name, TRIM(m.`" + uid + "`) as item,d.non_feeder, d.completed, e.name as employee, d.total, t.name as type,d.conditions,d.comments,d.started_On,d.completed_On FROM `" + JsonHandler.getSelJob().getJob_id() + "" + DBUtils.DBTable.D.getTable() + "` d INNER JOIN employees e ON d.employee_id = e.id INNER JOIN `" + JsonHandler.getSelJob().getJob_id() + "" + DBUtils.DBTable.G.getTable() + "` g ON d.group_id = g.id INNER JOIN item_types t ON d.type_id = t.id INNER JOIN `" + JsonHandler.getSelJob().getJob_id() + "" + DBUtils.DBTable.M.getTable() + "` m ON m.id=d.manifest_id INNER JOIN workstation w ON w.id=d.workstation WHERE d.group_id=" + group.getID() + " AND employee_id=" + ConnectionHandler.user.getId());
             set = ps.executeQuery();
             while (set.next()) {
-                final EntryItem item = new EntryItem(set.getInt("d.id"), group.getCollection(), group, set.getString("item"), set.getInt("d.total"), set.getInt("d.non_feeder"), set.getString("type"), set.getInt("d.completed") == 1, set.getString("d.comments"), set.getString("d.started_On"), set.getString("d.completed_On"), set.getString("w.name"));
+                final EntryItem item = new EntryItem(set.getInt("d.manifest_id"), group.getCollection(), group, set.getString("item"), set.getInt("d.total"), set.getInt("d.non_feeder"), set.getString("type"), set.getInt("d.completed") == 1, set.getString("d.comments"), set.getString("d.started_On"), set.getString("d.completed_On"), set.getString("w.name"));
                 final String condition = set.getString("d.conditions");
                 if (condition != null && !condition.isEmpty()) {
                     final String[] splitConditions = condition.split(", ");
@@ -387,7 +413,7 @@ public class ManifestViewController extends BaseEntryController<BaseEntryControl
         PreparedStatement ps = null;
         try {
             connection = ConnectionHandler.createDBConnection();
-            ps = connection.prepareStatement("DELETE FROM `" + JsonHandler.getSelJob().getJob_id() + "" + DBUtils.DBTable.D.getTable() + "` WHERE id=?");
+            ps = connection.prepareStatement("DELETE FROM `" + JsonHandler.getSelJob().getJob_id() + "" + DBUtils.DBTable.D.getTable() + "` WHERE manifest_id=?");
             ps.setInt(1, item.getId());
             ps.executeUpdate();
 
