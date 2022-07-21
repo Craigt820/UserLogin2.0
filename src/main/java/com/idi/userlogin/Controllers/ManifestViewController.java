@@ -123,7 +123,7 @@ public class ManifestViewController extends BaseEntryController<BaseEntryControl
         int key = 0;
         try {
             connection = ConnectionHandler.createDBConnection();
-            ps = connection.prepareStatement("INSERT INTO `" + JsonHandler.getSelJob().getJob_id() + "" + DBUtils.DBTable.D.getTable() + "` (manifest_id,type_id,employee_id,started_On,group_id,comments,workstation,location,conditions) VALUES((SELECT id FROM `" + JsonHandler.getSelJob().getJob_id() + "" + DBUtils.DBTable.M.getTable() + "` WHERE `" + uid + "`='" + itemCombo.getSelectionModel().getSelectedItem().getName() + "'),(SELECT id FROM item_types WHERE name='" + item.getType().getText() + "'),?,?,?,?,(SELECT id FROM workstation WHERE name='" + COMP_NAME + "'),1,?)");
+            ps = connection.prepareStatement("INSERT INTO `" + JsonHandler.getSelJob().getJob_id() + "" + DBUtils.DBTable.D.getTable() + "` (manifest_id,type_id,employee_id,started_On,group_id,comments,workstation,location,conditions,status_id) VALUES((SELECT id FROM `" + JsonHandler.getSelJob().getJob_id() + "" + DBUtils.DBTable.M.getTable() + "` WHERE `" + uid + "`='" + itemCombo.getSelectionModel().getSelectedItem().getName() + "'),(SELECT id FROM item_types WHERE name='" + item.getType().getText() + "'),?,?,?,?,(SELECT id FROM workstation WHERE name='" + COMP_NAME + "'),1,?,SELECT id FROM item_status WHERE name='Scanning')");
             Date now = formatDateTime(item.getStarted_On());
             ps.setInt(1, ConnectionHandler.user.getId());
             ps.setTimestamp(2, new Timestamp(now.toInstant().toEpochMilli()));

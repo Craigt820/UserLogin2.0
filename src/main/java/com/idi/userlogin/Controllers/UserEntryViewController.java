@@ -189,7 +189,7 @@ public class UserEntryViewController extends BaseEntryController<BaseEntryContro
         int key = 0;
         try {
             connection = ConnectionHandler.createDBConnection();
-            ps = connection.prepareStatement("INSERT INTO `" + JsonHandler.getSelJob().getJob_id() + "" + DBUtils.DBTable.D.getTable() + "` (item,group_id,started_on,employee_id,type_id,comments,conditions,location,workstation) VALUES(?,?,?,(SELECT id FROM employees WHERE employees.name= '" + ConnectionHandler.user.getName() + "'),(SELECT id FROM item_types WHERE item_types.name='" + item.getType().getText() + "'),?,?,1,(SELECT id FROM workstation WHERE name='" + COMP_NAME + "'))", PreparedStatement.RETURN_GENERATED_KEYS);
+            ps = connection.prepareStatement("INSERT INTO `" + JsonHandler.getSelJob().getJob_id() + "" + DBUtils.DBTable.D.getTable() + "` (item,group_id,started_on,employee_id,type_id,comments,conditions,location,workstation,status_id) VALUES(?,?,?,(SELECT id FROM employees WHERE employees.name= '" + ConnectionHandler.user.getName() + "'),(SELECT id FROM item_types WHERE item_types.name='" + item.getType().getText() + "'),?,?,1,(SELECT id FROM workstation WHERE name='" + COMP_NAME + "'),(SELECT id FROM item_status WHERE name='Scanning'))", PreparedStatement.RETURN_GENERATED_KEYS);
             ps.setString(1, item.getName());
             ps.setInt(2, item.getGroup().getID());
             Date now = formatDateTime(item.getStarted_On());

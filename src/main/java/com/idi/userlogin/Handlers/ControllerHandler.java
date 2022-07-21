@@ -571,7 +571,11 @@ public abstract class ControllerHandler {
         PreparedStatement ps = null;
         try {
             connection = ConnectionHandler.createDBConnection();
-            ps = connection.prepareStatement("Update `" + JsonHandler.getSelJob().getJob_id() + "" + DBUtils.DBTable.D.getTable() + "` SET total=?, completed=?, completed_On=? WHERE manifest_id=?");
+            if (JsonHandler.getSelJob().isUserEntry()) {
+                ps = connection.prepareStatement("Update `" + JsonHandler.getSelJob().getJob_id() + "" + DBUtils.DBTable.D.getTable() + "` SET total=?, completed=?, completed_On=? WHERE id=?");
+            } else {
+                ps = connection.prepareStatement("Update `" + JsonHandler.getSelJob().getJob_id() + "" + DBUtils.DBTable.D.getTable() + "` SET total=?, completed=?, completed_On=? WHERE manifest_id=?");
+            }
             ps.setInt(1, item.getTotal());
             ps.setInt(2, booleanToInt(item.getCompleted().isSelected()));
             if (item.getCompleted_On() != null && item.getCompleted().isSelected()) {
@@ -592,6 +596,7 @@ public abstract class ControllerHandler {
             DbUtils.closeQuietly(connection);
         }
     }
+
 
     public static int countPDF(File path) {
         int numPages = 0;

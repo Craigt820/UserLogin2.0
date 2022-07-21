@@ -131,7 +131,12 @@ public class Utils {
         ObservableList<TreeItem<String>> treeItems = FXCollections.observableArrayList();
         try {
             connection = ConnectionHandler.createDBConnection();
-            ps = connection.prepareStatement("SELECT * FROM `" + JsonHandler.getSelJob().getJob_id() + "" + DBUtils.DBTable.M.getTable() + "` m WHERE " + query + " LIMIT 1");
+            if (JsonHandler.getSelJob().isUserEntry()) {
+                ps = connection.prepareStatement("SELECT * FROM `" + JsonHandler.getSelJob().getJob_id() + "" + DBUtils.DBTable.G.getTable() + "` ggggggg WHERE " + query + " LIMIT 1");
+            } else {
+                ps = connection.prepareStatement("SELECT * FROM `" + JsonHandler.getSelJob().getJob_id() + "" + DBUtils.DBTable.M.getTable() + "` m WHERE " + query + " LIMIT 1");
+
+            }
             set = ps.executeQuery();
             List<String> headers = getHeadersInfo();
 
