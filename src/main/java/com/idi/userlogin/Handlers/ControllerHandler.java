@@ -159,7 +159,17 @@ public abstract class ControllerHandler {
             } catch (IOException e) {
                 fxTrayIcon.showErrorMessage("Error creating the folder structure! Please make sure your track path is valid!");
                 e.printStackTrace();
+            } finally {
+                Path finalNewStructPath = newStructPath;
+                Platform.runLater(()->{
+                    try {
+                        Desktop.getDesktop().open(finalNewStructPath.toFile());
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
             }
+
             fxTrayIcon.showInfoMessage(item.getLocation().toString() + " Created");
         }
     }
@@ -443,7 +453,7 @@ public abstract class ControllerHandler {
         PreparedStatement ps = null;
         try {
             connection = ConnectionHandler.createDBConnection();
-            ps = connection.prepareStatement("Update `" + JsonHandler.getSelJob().getJob_id() + "" + DBUtils.DBTable.D.getTable() + "` SET total=?, completed=?, completed_On=? WHERE id=?");
+            ps = connection.prepareStatement("Update `" + JsonHandler.getSelJob().getJob_id() + "" + DBUtils.DBTable.D.getTable() + "` SET total=?, s_comp=?, s_comp_on=? WHERE id=?");
             ps.setInt(1, item.getTotal());
             ps.setInt(2, booleanToInt(item.getCompleted().isSelected()));
             if (item.getCompleted().isSelected()) {
@@ -500,7 +510,7 @@ public abstract class ControllerHandler {
             connection = ConnectionHandler.createDBConnection();
 
             if (completed) {
-                ps = connection.prepareStatement("Update `" + JsonHandler.getSelJob().getJob_id() + "" + DBUtils.DBTable.G.getTable() + "` SET total=?, scanned=?, completed_On=?, status_id=(SELECT id from `sc_group_status` WHERE name='Scanned') WHERE id=?");
+                ps = connection.prepareStatement("Update `" + JsonHandler.getSelJob().getJob_id() + "" + DBUtils.DBTable.G.getTable() + "` SET total=?, scanned=?, s_comp_on=?, status_id=(SELECT id from `sc_group_status` WHERE name='Scanned') WHERE id=?");
                 ps.setInt(1, group.getTotal());
                 ps.setInt(2, booleanToInt(completed));
                 final Date now = formatDateTime(LocalDateTime.now().toString());
@@ -572,9 +582,9 @@ public abstract class ControllerHandler {
         try {
             connection = ConnectionHandler.createDBConnection();
             if (JsonHandler.getSelJob().isUserEntry()) {
-                ps = connection.prepareStatement("Update `" + JsonHandler.getSelJob().getJob_id() + "" + DBUtils.DBTable.D.getTable() + "` SET total=?, completed=?, completed_On=? WHERE id=?");
+                ps = connection.prepareStatement("Update `" + JsonHandler.getSelJob().getJob_id() + "" + DBUtils.DBTable.D.getTable() + "` SET total=?, s_comp=?, s_comp_on=? WHERE id=?");
             } else {
-                ps = connection.prepareStatement("Update `" + JsonHandler.getSelJob().getJob_id() + "" + DBUtils.DBTable.D.getTable() + "` SET total=?, completed=?, completed_On=? WHERE manifest_id=?");
+                ps = connection.prepareStatement("Update `" + JsonHandler.getSelJob().getJob_id() + "" + DBUtils.DBTable.D.getTable() + "` SET total=?, s_comp=?, s_comp_on=? WHERE manifest_id=?");
             }
             ps.setInt(1, item.getTotal());
             ps.setInt(2, booleanToInt(item.getCompleted().isSelected()));

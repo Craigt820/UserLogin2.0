@@ -1,0 +1,64 @@
+Jul 22, 2022 3:07:18 PM com.idi.userlogin.Controllers.ManifestViewController getItemsForCombo
+SEVERE: There was an error getting the groups from the db!
+java.sql.SQLSyntaxErrorException: Table 'tracking.asp_archie_003_m' doesn't exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:916)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeQuery(ClientPreparedStatement.java:972)
+	at com.idi.userlogin.Controllers.ManifestViewController.getItemsForCombo(ManifestViewController.java:332)
+	at com.idi.userlogin.Controllers.ManifestViewController.lambda$groupSelectTask$13(ManifestViewController.java:303)
+	at java.util.concurrent.CompletableFuture$AsyncRun.run(CompletableFuture.java:1640)
+	at java.util.concurrent.CompletableFuture$AsyncRun.exec(CompletableFuture.java:1632)
+	at java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:289)
+	at java.util.concurrent.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1067)
+	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1703)
+	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:172)
+
+Jul 22, 2022 3:07:18 PM com.idi.userlogin.Controllers.ManifestViewController getGroupItems
+SEVERE: There was an error getting the groups from the db!
+java.sql.SQLSyntaxErrorException: Table 'tracking.asp_archie_003_d' doesn't exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:916)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeQuery(ClientPreparedStatement.java:972)
+	at com.idi.userlogin.Controllers.ManifestViewController.getGroupItems(ManifestViewController.java:376)
+	at com.idi.userlogin.Controllers.ManifestViewController.lambda$groupSelectTask$7(ManifestViewController.java:282)
+	at java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1604)
+	at java.util.concurrent.CompletableFuture$AsyncSupply.exec(CompletableFuture.java:1596)
+	at java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:289)
+	at java.util.concurrent.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1067)
+	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1703)
+	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:172)
+
+Jul 22, 2022 3:07:20 PM com.idi.userlogin.Controllers.ManifestViewController getGroupItems
+SEVERE: There was an error getting the groups from the db!
+java.sql.SQLSyntaxErrorException: Table 'tracking.asp_archie_003_d' doesn't exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:916)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeQuery(ClientPreparedStatement.java:972)
+	at com.idi.userlogin.Controllers.ManifestViewController.getGroupItems(ManifestViewController.java:376)
+	at com.idi.userlogin.Controllers.ManifestViewController.lambda$groupSelectTask$7(ManifestViewController.java:282)
+	at java.util.concurrent.CompletableFuture$AsyncSupply.run(CompletableFuture.java:1604)
+	at java.util.concurrent.CompletableFuture$AsyncSupply.exec(CompletableFuture.java:1596)
+	at java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:289)
+	at java.util.concurrent.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1067)
+	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1703)
+	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:172)
+
+Jul 22, 2022 3:07:20 PM com.idi.userlogin.Controllers.ManifestViewController getItemsForCombo
+SEVERE: There was an error getting the groups from the db!
+java.sql.SQLSyntaxErrorException: Table 'tracking.asp_archie_003_m' doesn't exist
+	at com.mysql.cj.jdbc.exceptions.SQLError.createSQLException(SQLError.java:120)
+	at com.mysql.cj.jdbc.exceptions.SQLExceptionsMapping.translateException(SQLExceptionsMapping.java:122)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeInternal(ClientPreparedStatement.java:916)
+	at com.mysql.cj.jdbc.ClientPreparedStatement.executeQuery(ClientPreparedStatement.java:972)
+	at com.idi.userlogin.Controllers.ManifestViewController.getItemsForCombo(ManifestViewController.java:332)
+	at com.idi.userlogin.Controllers.ManifestViewController.lambda$groupSelectTask$13(ManifestViewController.java:303)
+	at java.util.concurrent.CompletableFuture$AsyncRun.run(CompletableFuture.java:1640)
+	at java.util.concurrent.CompletableFuture$AsyncRun.exec(CompletableFuture.java:1632)
+	at java.util.concurrent.ForkJoinTask.doExec(ForkJoinTask.java:289)
+	at java.util.concurrent.ForkJoinPool$WorkQueue.runTask(ForkJoinPool.java:1067)
+	at java.util.concurrent.ForkJoinPool.runWorker(ForkJoinPool.java:1703)
+	at java.util.concurrent.ForkJoinWorkerThread.run(ForkJoinWorkerThread.java:172)
+

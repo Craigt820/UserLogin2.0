@@ -1159,7 +1159,7 @@ public abstract class BaseEntryController<T extends Item> extends ControllerHand
         int key = 0;
         try {
             connection = ConnectionHandler.createDBConnection();
-            ps = connection.prepareStatement("INSERT INTO `" + JsonHandler.getSelJob().getJob_id() + "" + DBUtils.DBTable.M.getTable() + "` (name,collection_id,job_id,started_on,employees,status_id) VALUES(?,?,(SELECT id FROM projects WHERE job_id='" + JsonHandler.getSelJob().getJob_id() + "'),?,?,(SELECT id FROM `sc_group_status` WHERE name=?))", PreparedStatement.RETURN_GENERATED_KEYS);
+            ps = connection.prepareStatement("INSERT INTO `" + JsonHandler.getSelJob().getJob_id() + "" + DBUtils.DBTable.M.getTable() + "` (name,collection_id,job_id,s_start_on,employees,status_id) VALUES(?,?,(SELECT id FROM projects WHERE job_id='" + JsonHandler.getSelJob().getJob_id() + "'),?,?,(SELECT id FROM `sc_group_status` WHERE name=?))", PreparedStatement.RETURN_GENERATED_KEYS);
             ps.setString(1, group.getName());
             ps.setInt(2, group.getCollection().getID());
             Date now = formatDateTime(group.getStarted_On());
