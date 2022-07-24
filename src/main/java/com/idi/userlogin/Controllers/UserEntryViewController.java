@@ -234,7 +234,7 @@ public class UserEntryViewController extends BaseEntryController<BaseEntryContro
             ps = connection.prepareStatement("SELECT d.workstation,d.item,d.id,d.group_id as group_id,d.non_feeder, d.s_comp, e.name as employee, d.total, t.name as type,d.conditions,d.comments,d.s_start_on,d.s_comp_on FROM `" + JsonHandler.getSelJob().getJob_id() + "" + DBUtils.DBTable.D.getTable() + "` d INNER JOIN employees e ON d.employee_id = e.id INNER JOIN `" + JsonHandler.getSelJob().getJob_id() + "" + DBUtils.DBTable.G.getTable() + "` g ON d.group_id = g.id INNER JOIN item_types t ON d.type_id = t.id WHERE group_id=" + group.getID() + "");
             set = ps.executeQuery();
             while (set.next()) {
-                final EntryItem item = new EntryItem(set.getInt("d.id"), group.getCollection(), group, set.getString("item"), set.getInt("d.total"), set.getInt("d.non_feeder"), set.getString("type"), set.getInt("d.s_comp") == 1, set.getString("d.comments"), set.getString("d.s_start_on"), set.getString("d.s.comp_on"), set.getString("d.workstation"));
+                final EntryItem item = new EntryItem(set.getInt("d.id"), group.getCollection(), group, set.getString("item"), set.getInt("d.total"), set.getInt("d.non_feeder"), set.getString("type"), set.getInt("d.s_comp") == 1, set.getString("d.comments"), set.getString("d.s_start_on"), set.getString("d.s_comp_on"), set.getString("d.workstation"));
                 String condition = set.getString("d.conditions");
                 if (condition != null && !condition.isEmpty()) {
                     String[] splitConditions = condition.split(", ");

@@ -132,7 +132,7 @@ public class Utils {
         try {
             connection = ConnectionHandler.createDBConnection();
             if (JsonHandler.getSelJob().isUserEntry()) {
-                ps = connection.prepareStatement("SELECT * FROM `" + JsonHandler.getSelJob().getJob_id() + "" + DBUtils.DBTable.G.getTable() + "` ggggggg WHERE " + query + " LIMIT 1");
+                ps = connection.prepareStatement("SELECT * FROM `" + JsonHandler.getSelJob().getJob_id() + "" + DBUtils.DBTable.G.getTable() + "` g WHERE " + query + " LIMIT 1");
             } else {
                 ps = connection.prepareStatement("SELECT * FROM `" + JsonHandler.getSelJob().getJob_id() + "" + DBUtils.DBTable.M.getTable() + "` m WHERE " + query + " LIMIT 1");
 
