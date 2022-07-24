@@ -16,6 +16,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import com.idi.userlogin.Main;
 import com.idi.userlogin.utils.CustomAlert;
+import javafx.scene.layout.VBox;
 import org.apache.commons.dbutils.DbUtils;
 
 import java.io.IOException;
@@ -153,13 +154,13 @@ public class LoggedInController implements Initializable {
                 if (getMainTreeView() != null) {
                     CompletableFuture.runAsync(() -> {
                                 updateAll(selGroup.getItemList());
-                            }).thenRun(BaseEntryController::countGroupTotal)
-                            .thenRun(() -> {
+                            }).thenRunAsync(BaseEntryController::countGroupTotal)
+                            .thenRunAsync(() -> {
                                 updateGroup(selGroup, false);
                             }).thenRun(() -> ProjectLog.updateLog(selGroup))
-                            .thenRun(() -> {
+                            .thenRunAsync(() -> {
                                 updateStatus("Offline");
-                            }).thenRun(() -> {
+                            }).thenRunAsync(() -> {
                                 ProjectLog.endLog();
                             }).join();
 

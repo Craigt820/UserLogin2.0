@@ -672,6 +672,7 @@ public abstract class ControllerHandler {
             if (overlay) {
                 addOpaqueLayer(root);
             }
+            root.setPrefSize(Main.mainMenuStage.getWidth(), Main.mainMenuStage.getHeight());
 
         } catch (IOException e) {
             e.printStackTrace();

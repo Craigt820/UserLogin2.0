@@ -189,7 +189,7 @@ public class UserEntryViewController extends BaseEntryController<BaseEntryContro
         int key = 0;
         try {
             connection = ConnectionHandler.createDBConnection();
-            ps = connection.prepareStatement("INSERT INTO `" + JsonHandler.getSelJob().getJob_id() + "" + DBUtils.DBTable.D.getTable() + "` (item,group_id,started_on,employee_id,type_id,comments,conditions,location,workstation,status_id) VALUES(?,?,?,(SELECT id FROM employees WHERE employees.name= '" + ConnectionHandler.user.getName() + "'),(SELECT id FROM item_types WHERE item_types.name='" + item.getType().getText() + "'),?,?,1,(SELECT id FROM workstation WHERE name='" + COMP_NAME + "'),(SELECT id FROM item_status WHERE name='Scanning'))", PreparedStatement.RETURN_GENERATED_KEYS);
+            ps = connection.prepareStatement("INSERT INTO `" + JsonHandler.getSelJob().getJob_id() + "" + DBUtils.DBTable.D.getTable() + "` (item,group_id,s_start_on,employee_id,type_id,comments,conditions,location,workstation,status_id) VALUES(?,?,?,(SELECT id FROM employees WHERE employees.name= '" + ConnectionHandler.user.getName() + "'),(SELECT id FROM item_types WHERE item_types.name='" + item.getType().getText() + "'),?,?,1,(SELECT id FROM workstation WHERE name='" + COMP_NAME + "'),(SELECT id FROM item_status WHERE name='Scanning'))", PreparedStatement.RETURN_GENERATED_KEYS);
             ps.setString(1, item.getName());
             ps.setInt(2, item.getGroup().getID());
             Date now = formatDateTime(item.getStarted_On());
@@ -231,10 +231,10 @@ public class UserEntryViewController extends BaseEntryController<BaseEntryContro
         AtomicInteger progress = new AtomicInteger(0);
         try {
             connection = ConnectionHandler.createDBConnection();
-            ps = connection.prepareStatement("SELECT d.workstation,d.item,d.id,d.group_id as group_id,d.non_feeder, d.s_comp, e.name as employee, d.total, t.name as type,d.conditions,d.comments,d.started_On,d.s_comp_on FROM `" + JsonHandler.getSelJob().getJob_id() + "" + DBUtils.DBTable.D.getTable() + "` d INNER JOIN employees e ON d.employee_id = e.id INNER JOIN `" + JsonHandler.getSelJob().getJob_id() + "" + DBUtils.DBTable.G.getTable() + "` g ON d.group_id = g.id INNER JOIN item_types t ON d.type_id = t.id WHERE group_id=" + group.getID() + "");
+            ps = connection.prepareStatement("SELECT d.workstation,d.item,d.id,d.group_id as group_id,d.non_feeder, d.s_comp, e.name as employee, d.total, t.name as type,d.conditions,d.comments,d.s_start_on,d.s_comp_on FROM `" + JsonHandler.getSelJob().getJob_id() + "" + DBUtils.DBTable.D.getTable() + "` d INNER JOIN employees e ON d.employee_id = e.id INNER JOIN `" + JsonHandler.getSelJob().getJob_id() + "" + DBUtils.DBTable.G.getTable() + "` g ON d.group_id = g.id INNER JOIN item_types t ON d.type_id = t.id WHERE group_id=" + group.getID() + "");
             set = ps.executeQuery();
             while (set.next()) {
-                final EntryItem item = new EntryItem(set.getInt("d.id"), group.getCollection(), group, set.getString("item"), set.getInt("d.total"), set.getInt("d.non_feeder"), set.getString("type"), set.getInt("d.comp") == 1, set.getString("d.comments"), set.getString("d.started_On"), set.getString("d.s.comp_on"), set.getString("d.workstation"));
+                final EntryItem item = new EntryItem(set.getInt("d.id"), group.getCollection(), group, set.getString("item"), set.getInt("d.total"), set.getInt("d.non_feeder"), set.getString("type"), set.getInt("d.s_comp") == 1, set.getString("d.comments"), set.getString("d.s_start_on"), set.getString("d.s.comp_on"), set.getString("d.workstation"));
                 String condition = set.getString("d.conditions");
                 if (condition != null && !condition.isEmpty()) {
                     String[] splitConditions = condition.split(", ");

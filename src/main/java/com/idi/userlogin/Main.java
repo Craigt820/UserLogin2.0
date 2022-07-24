@@ -33,9 +33,12 @@ public class Main extends Application {
     public static boolean consumeStage; //Flag to block closing the window ONLY if on the main menu window
     public static FileHandler logHandler;
     private static SimpleFormatter formatter;
+    public static Stage mainMenuStage;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
+        mainMenuStage = primaryStage;
+
 //        com.sun.javafx.util.Logging.getCSSLogger().setLevel(sun.util.logging.PlatformLogger.Level.OFF);
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/MainMenu.fxml"));
         Scene scene = new Scene(root);
